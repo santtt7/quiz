@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>十问识君 · 历史人物人格测试</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:#f7f3ea;color:#2b2b2b;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  background-image:radial-gradient(circle at 20% 10%,rgba(0,0,0,.02),transparent 40%);
+}
+.page{width:100%;max-width:440px;padding:36px 20px 24px}
+.cloud{display:block;margin:0 auto 20px;opacity:.45}
+.vtitle{
+  writing-mode:vertical-rl;letter-spacing:10px;font-size:30px;font-weight:600;
+  margin:8px auto 0;line-height:1.2;height:180px;
+  font-family:"STKaiti","KaiTi","Songti SC",serif;
+}
+.sub{color:#6b655a;font-size:14px;line-height:24px;text-align:center;margin:22px 0 28px}
+.btn{
+  width:100%;padding:13px;border-radius:10px;border:1px solid #2b2b2b;
+  background:#2b2b2b;color:#f7f3ea;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:opacity .15s ease;font-family:inherit;
+}
+.btn:hover{opacity:.85}
+.btn.ghost{background:transparent;color:#2b2b2b;border-color:#c9c2b2}
+.meta{display:flex;justify-content:space-between;font-size:12px;color:#8a8375;margin-bottom:8px}
+.bar{height:4px;background:#e6dfd0;border-radius:4px;overflow:hidden;margin-bottom:26px}
+.bar i{display:block;height:100%;background:#2b2b2b;border-radius:4px;transition:width .25s ease}
+.q{font-size:20px;font-weight:600;line-height:32px;margin:0 0 22px}
+.opt{
+  display:block;width:100%;text-align:left;padding:13px 16px;margin-bottom:12px;
+  border-radius:10px;border:1px solid #c9c2b2;background:rgba(255,255,255,.5);
+  color:#2b2b2b;font-size:15px;line-height:23px;cursor:pointer;
+  transition:border-color .15s ease;font-family:inherit;
+}
+.opt:hover{border-color:#2b2b2b}
+.opt b{font-weight:400;color:#a39b89;margin-right:10px;font-size:13px}
+.seal{
+  width:58px;height:58px;border-radius:8px;background:#b03a2e;color:#fdf8ef;
+  display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;
+  line-height:1.1;text-align:center;margin:0 auto 18px;letter-spacing:1px;
+  font-family:"STKaiti","KaiTi",serif;box-shadow:0 1px 3px rgba(0,0,0,.15);
+}
+.name{font-size:34px;font-weight:600;text-align:center;letter-spacing:8px;margin:0 0 6px;
+  font-family:"STKaiti","KaiTi","Songti SC",serif}
+.title2{text-align:center;color:#8a8375;font-size:14px;margin:0 0 22px}
+.ringwrap{display:flex;flex-direction:column;align-items:center;margin-bottom:22px}
+.pct{font-size:32px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:-74px}
+.pctlbl{font-size:12px;color:#a39b89;margin-top:38px}
+.read{font-size:15px;line-height:27px;color:#55503f;margin:0 0 18px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px}
+.tag{padding:4px 12px;border-radius:6px;border:1px solid #c9c2b2;font-size:13px;color:#6b655a;background:rgba(255,255,255,.5)}
+.quote{padding:12px 16px;border-left:2px solid #b03a2e;color:#8a8375;font-size:14px;line-height:24px;margin:0 0 22px}
+.quote span{display:block;font-size:12px;margin-top:4px}
+.run{text-align:center;font-size:13px;color:#a39b89;margin:0 0 22px}
+.foot{text-align:center;font-size:12px;color:#a39b89;margin-top:24px;line-height:20px}
+.screen{animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="page">
+  <svg class="cloud" width="220" height="14" viewBox="0 0 220 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 11 C24 11 24 3 44 3 C64 3 64 11 84 11 C104 11 104 3 124 3 C144 3 144 11 164 11 C184 11 184 3 204 3" stroke="#8a8375" stroke-width="1.2"/><path d="M18 11 C30 11 30 7 42 7 M118 11 C130 11 130 7 142 7 M192 11 C200 11 200 8 208 8" stroke="#8a8375" stroke-width="1" opacity=".55"/></svg>
+  <div class="screen" id="scr"></div>
+  <div class="foot">千古风流 · 十问识人<br>截图发朋友圈，看看朋友像谁</div>
+</div>
+
+<script>
+var PEOPLE=[
+ {key:"诸葛",name:"诸葛亮",title:"卧龙 · 谋定后动",tags:["深谋远虑","鞠躬尽瘁","谨慎周全"],
+  read:"你习惯把局势看在眼里、把风险想在前面。做事有章法，许诺必践，是值得托付的人。只是偶尔也让自己松口气，不必凡事独扛。",
+  quote:"非淡泊无以明志，非宁静无以致远。",from:"—— 诸葛亮《诫子书》"},
+ {key:"魏武",name:"曹操",title:"魏武 · 挟风雷而行",tags:["雄才大略","当机立断","不拘一格"],
+  read:"你目标感极强，敢拍板、能扛事，乱世里你会是第一个站出来收拾局面的人。成大事者不拘小节，记得也给身边人留三分余地。",
+  quote:"老骥伏枥，志在千里；烈士暮年，壮心不已。",from:"—— 曹操《龟虽寿》"},
+ {key:"青莲",name:"李白",title:"青莲 · 诗酒趁年华",tags:["浪漫不羁","才情横溢","快意人生"],
+  read:"你心里住着一片山水，讨厌被规矩束缚，兴之所至便仗剑而行。你的才华与感染力是天赋，若再加一分专注，天地皆宽。",
+  quote:"天生我材必有用，千金散尽还复来。",from:"—— 李白《将进酒》"},
+ {key:"则天",name:"武则天",title:"曌 · 乾坤在握",tags:["意志如铁","善御人心","打破桎梏"],
+  read:"你从不认命，越难的局面越能激起你的斗志。你懂人心、善用势，是天生的破局者。登顶路上，记得别让权谋磨掉了最初的自己。",
+  quote:"日月当空，照临下土。",from:"—— 武则天造字「曌」"}];
+
+var QS=[
+ ["深夜，一件悬而未决的事让你辗转难眠，你会？",[
+  ["起身点灯，今晚务必想清楚对策",0],["先睡，天塌下来明日再扛",2],
+  ["盘算这事背后是谁在博弈",3],["立刻动手，连夜把它做完",1]]],
+ ["好友突然拉你去一场毫无准备的远行，你的第一反应？",[
+  ["说走就走，人生贵在尽兴",2],["问清目的地，做个简易攻略",0],
+  ["先算成本与收益，值得再去",1],["可以，但行程要由我来定",3]]],
+ ["团队陷入困境、众人心浮气躁时，你通常？",[
+  ["逐一分析利弊，给出最优解",0],["站出来稳住局面，该我扛的我扛",1],
+  ["讲个笑话，先把气氛盘活",2],["看清谁在拖后腿，先敲山震虎",3]]],
+ ["面对一个千载难逢但风险极大的机会，你会？",[
+  ["谋定后动，算清三步再落子",0],["富贵险中求，干了再说",1],
+  ["若值得一搏，不惜代价也要拿下",3],["犹豫再三，还是稳妥为上",2]]],
+ ["你更向往哪一种生活？",[
+  ["诗酒山水，快意江湖",2],["帷幄之中，决胜千里",1],
+  ["庙堂之上，经世济民",0],["命运自己主宰，不做任何人的棋子",3]]],
+ ["有人当众质疑你的能力，你会？",[
+  ["不争一时，用结果说话",0],["当场回敬，气势不能输",1],
+  ["一笑置之，燕雀安知鸿鹄志",2],["记下一笔，日后让他心服口服",3]]],
+ ["一个完全空闲的周末下午，你最想做什么？",[
+  ["读一卷闲书，泡一壶清茶",0],["约三五好友，把酒言欢",1],
+  ["随性出门，看云看水",2],["独处静思，布好下一步的棋",3]]],
+ ["若送你一座城池治理，你的第一件事是？",[
+  ["立法度、明赏罚，先立规矩",3],["屯田养兵，固本强基",0],
+  ["广纳贤才，唯才是举",1],["轻徭薄赋，与民同乐",2]]],
+ ["评价一位历史人物时，你最看重什么？",[
+  ["智慧与远见",0],["功业与格局",1],
+  ["才情与风骨",2],["手腕与成就，成王败寇",3]]],
+ ["倘若人生只剩最后一年，你会怎么过？",[
+  ["挑灯夜战，把未竟之业完成",0],["大笑出门，游遍名山大川",2],
+  ["与家人挚友，把酒言欢",1],["布好身后局，站好最后一班岗",3]]]];
+
+var scr=document.getElementById("scr"),idx=0,scores=[0,0,0,0];
+var LET=["甲","乙","丙","丁"];
+
+function intro(){
+ scr.innerHTML='<div style="display:flex;justify-content:center"><h1 class="vtitle">十问识君</h1></div>'
+ +'<p class="sub">十道情境题，测测你与哪位古人最像<br>诸葛之谋、魏武之略、青莲之才、曌之魄</p>'
+ +'<button class="btn" onclick="quiz()">开 始 作 答</button>';
+}
+function quiz(){
+ var d=QS[idx];
+ scr.innerHTML='<div class="meta"><span>第 '+(idx+1)+' 问 · 共 10 问</span><span>凭直觉作答</span></div>'
+ +'<div class="bar"><i style="width:'+(idx*10)+'%"></i></div>'
+ +'<h2 class="q">'+d[0]+'</h2>'
+ +d[1].map(function(o,i){return '<button class="opt" onclick="pick('+o[1]+')"><b>'+LETT[i]+'</b>'+o[0]+'</button>'}).join("");
+ requestAnimationFrame(function(){var b=scr.querySelector(".bar i");if(b)b.style.width=(idx*10)+"%";});
+}
+function pick(p){scores[p]++;idx++;idx<QS.length?quiz():result();}
+function result(){
+ var top=0,second=1;
+ for(var i=1;i<4;i++){if(scores[i]>scores[top]){second=top;top=i}else if(i!==top&&scores[i]>scores[second]){second=i}}
+ var pct=Math.round(72+26*(scores[top]/10));
+ var r=42,c=2*Math.PI*r,off=c*(1-pct/100),p=PEOPLE[top],s=PEOPLE[second];
+ scr.innerHTML='<div class="seal">'+p.key+'</div>'
+ +'<h2 class="name">'+p.name+'</h2>'
+ +'<p class="title2">'+p.title+'</p>'
+ +'<div class="ringwrap"><svg width="104" height="104" viewBox="0 0 104 104">'
+ +'<circle cx="52" cy="52" r="'+r+'" fill="none" stroke="#e6dfd0" stroke-width="6"/>'
+ +'<circle cx="52" cy="52" r="'+r+'" fill="none" stroke="#2b2b2b" stroke-width="6" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" transform="rotate(-90 52 52)"/></svg>'
+ +'<div class="pct">'+pct+'%</div><div class="pctlbl">性格匹配度</div></div>'
+ +'<p class="read">'+p.read+'</p>'
+ +'<div class="tags">'+p.tags.map(function(t){return '<span class="tag">'+t+'</span>'}).join("")+'</div>'
+ +'<div class="quote">「'+p.quote+'」<span>'+p.from+'</span></div>'
+ +'<p class="run">次之：'+s.name+' —— 兼而有之，方为全人</p>'
+ +'<button class="btn ghost" onclick="resetAll()">↻ 再测一次</button>';
+}
+function resetAll(){idx=0;scores=[0,0,0,0];intro();}
+intro();
+</script>
+</body>
+</html>
